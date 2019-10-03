@@ -1,0 +1,45 @@
+body {
+    font-size: 16pt;
+}
+
+.ask_header {
+    background: #00B050;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}
+
+.ask_count {
+    font-weight: bold;
+}
+
+.ask_item {
+    border: 2px #FFC000 solid;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check_box {
+    border-radius: 50%;
+    border: #C0C0C0 2px solid;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check_box_child {
+    width: 20px;
+    height: 20px;
+}
+
+.answer_variant {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 20pt;
+}

@@ -1,0 +1,55 @@
+body {
+    font-size: 16pt;
+}
+
+.header_info {
+    background: #666;
+    color: #fff;
+    text-align: center;
+    padding: 0 40px;
+    margin-bottom: 10px;
+}
+
+.ask {
+    margin-bottom: 20px;
+}
+
+.ask_header {
+    background: #00B050;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}
+
+.ask_count {
+    font-weight: bold;
+}
+
+.assessment_item {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.assessment_btn {
+    border: 2px solid #666;
+}
+
+.assessment_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    height: 100%;
+}
+
+.assessment_text_no {
+    color: #C00000;
+}
+
+.assessment_text_yes {
+    color: #00B050;
+}
