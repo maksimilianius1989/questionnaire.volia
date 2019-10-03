@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\api;
 
 use Yii;
 
-class TestController extends BaseController
+class MarkController extends BaseController
 {
 
     ///?token=[md5(sole + email + date('d-m-Y'))]&email=test@test.com&username=Maks%20Ivanov&test=098f6bcd4621d373cade4e832627b4f6
@@ -15,6 +15,6 @@ class TestController extends BaseController
         $username = Yii::$app->request->get('username');
         $testHash = Yii::$app->request->get('test');
 
-        return ['test' => 'index'];
+        return ['mark' => 'index'];
     }
 }
