@@ -6,7 +6,7 @@ body {
     background: #00B050;
     color: #fff;
     padding: 10px 20px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .ask_count {
@@ -15,6 +15,7 @@ body {
 
 .ask_item {
     border: 2px #FFC000 solid;
+    margin-bottom: 20px;
 }
 
 .center {

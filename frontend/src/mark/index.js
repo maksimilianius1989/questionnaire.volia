@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './app.module.css'
 
-class App extends React.Component {
+class Mark extends React.Component {
     render() {
         return (
             <div className="container">
@@ -189,4 +189,4 @@ class App extends React.Component {
     }
 }
 
-export default App
+export default Mark
