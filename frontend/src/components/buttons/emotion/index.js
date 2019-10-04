@@ -2,9 +2,17 @@ import React, {Component} from 'react'
 import styles from "./emotion.module.css"
 
 export default class EmotionBtn extends Component {
-    
+    state = {
+        isSelect: false
+    }
+
+    changeBtnState = () => {
+        this.setState({isSelect: !this.state.isSelect})
+    }
 
     render() {
+        let styleClasses = this.state.isSelect ? styles.assessment_btn_active : ''
+
         return (
             <div>
                 <div className="row">
@@ -14,7 +22,12 @@ export default class EmotionBtn extends Component {
                 </div>
                 <div className="row">
                     <div className="col-md-12">
-                        <div className={styles.assessment_item + ' ' + styles.assessment_btn}>
+                        <div
+                            onClick={this.changeBtnState}
+                            className={styles.assessment_item + ' '
+                                + styles.assessment_btn + ' '
+                                + styleClasses}
+                        >
                             <span className={styles.assessment_number}>1</span>
                         </div>
                     </div>

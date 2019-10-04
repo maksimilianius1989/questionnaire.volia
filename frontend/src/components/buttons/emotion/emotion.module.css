@@ -8,15 +8,21 @@
     cursor: pointer;
 }
 
-.assessment_item:hover {
-    background: #666;
-    color: #fff;
-}
-
 .assessment_number {
     font-weight: bold;
 }
 
 .assessment_btn {
     border: 2px solid #666;
+}
+
+.assessment_btn:hover {
+    background: #666;
+    color: #fff;
+    border-color: red;
+}
+
+.assessment_btn_active {
+    background: #666;
+    color: #fff;
 }
