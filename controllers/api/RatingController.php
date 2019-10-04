@@ -4,7 +4,7 @@ namespace app\controllers\api;
 
 use Yii;
 
-class MarkController extends BaseController
+class RatingController extends BaseController
 {
 
     ///?token=[md5(sole + email + date('d-m-Y'))]&email=test@test.com&username=Maks%20Ivanov&test=098f6bcd4621d373cade4e832627b4f6
@@ -15,6 +15,6 @@ class MarkController extends BaseController
         $username = Yii::$app->request->get('username');
         $testHash = Yii::$app->request->get('test');
 
-        return ['mark' => 'index'];
+        return ['rating' => 'index'];
     }
 }

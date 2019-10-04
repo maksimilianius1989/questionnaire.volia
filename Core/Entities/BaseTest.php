@@ -10,7 +10,7 @@ use yii\db\ActiveRecord;
 class BaseTest extends ActiveRecord
 {
     const TYPE_TEST = 0; // тест
-    const TYPE_MARK = 1; // опросник
+    const TYPE_RATING = 1; // опросник
 
     public $id;
     public $scale; // шкала оценки
