@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './app.module.css'
+import styles from './index.module.css'
 import RatingAsk from '~c/asks/rating'
 import Footer from '~c/footer/rating'
 
@@ -19,7 +19,9 @@ class Rating extends React.Component {
                 <div className="row">
                     <div className="col-md-12">
 
-                        <Footer />
+                        <Footer
+                            isDisabled={true}
+                        />
 
                     </div>
                 </div>

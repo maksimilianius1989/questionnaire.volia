@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './app.module.css'
+import styles from './index.module.css'
 
 class Test extends React.Component {
     render() {
