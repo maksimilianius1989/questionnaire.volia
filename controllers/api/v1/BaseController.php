@@ -31,20 +31,20 @@ class BaseController extends Controller
         $this->testId = Yii::$app->request->get('test_id');
         $this->testType = Yii::$app->request->get('test_type');
 
-        if(!$this->accessService->accessToTest(
-            $this->token,
-            $this->email,
-            $this->username,
-            $this->testId,
-            $this->testType
-        )) {
-            $this->asJson([
-                'code' => 'ERROR',
-                'message' => 'Access denied.',
-            ]);
-
-            return false;
-        }
+//        if(!$this->accessService->accessToTest(
+//            $this->token,
+//            $this->email,
+//            $this->username,
+//            $this->testId,
+//            $this->testType
+//        )) {
+//            $this->asJson([
+//                'code' => 'ERROR',
+//                'message' => 'Access denied.',
+//            ]);
+//
+//            return false;
+//        }
 
         return parent::beforeAction($action);
     }

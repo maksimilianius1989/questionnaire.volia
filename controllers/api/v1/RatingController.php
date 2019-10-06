@@ -7,7 +7,7 @@ use Yii;
 class RatingController extends BaseController
 {
     ///?token=[md5(sole + email + date('d-m-Y'))]&email=test@test.com&username=Maks%20Ivanov&rating_id=1
-    public function actionLoad()
+    public function actionIndex()
     {
         // должна использоватея еще систима рандома для пользователей
         return [
@@ -70,7 +70,7 @@ class RatingController extends BaseController
         ];
     }
 
-    public function actionSend()
+    public function actionCreate()
     {
 
     }

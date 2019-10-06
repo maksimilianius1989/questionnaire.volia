@@ -7,7 +7,7 @@ use Yii;
 class TestController extends BaseController
 {
     ///?token=[md5(sole + email + date('d-m-Y'))]&email=test@test.com&username=Maks%20Ivanov&test_id=1
-    public function actionLoad()
+    public function actionIndex()
     {
         // должна использоватея еще систима рандома для пользователей
         return [
@@ -249,8 +249,8 @@ class TestController extends BaseController
             ],
         ];
     }
-    
-    public function actionSend()
+
+    public function actionCreate()
     {
         
     }

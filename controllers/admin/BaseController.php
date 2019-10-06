@@ -29,19 +29,19 @@ class BaseController extends Controller
         $this->username = Yii::$app->request->get('user_name');
         $this->userRole = Yii::$app->request->get('user_role');
 
-        if(!$this->accessService->accessToAdmin(
-            $this->token,
-            $this->email,
-            $this->username,
-            $this->userRole
-        )) {
-            $this->asJson([
-                'code' => 'ERROR',
-                'message' => 'Access denied.',
-            ]);
-
-            return false;
-        }
+//        if(!$this->accessService->accessToAdmin(
+//            $this->token,
+//            $this->email,
+//            $this->username,
+//            $this->userRole
+//        )) {
+//            $this->asJson([
+//                'code' => 'ERROR',
+//                'message' => 'Access denied.',
+//            ]);
+//
+//            return false;
+//        }
 
         return parent::beforeAction($action);
     }
