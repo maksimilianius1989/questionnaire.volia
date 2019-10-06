@@ -6,8 +6,13 @@ class AccessHelper
 {
     const SOLE = "6F^D(ffsf9FD@!&&";
 
-    public static function generateAccessToken($email)
+    public static function generateTestToken($email, $username, $testId, $testType)
     {
-        return md5(self::SOLE . $email . date('d-m-Y'));
+        return md5(md5(self::SOLE . $email . $username . $testId . $testType));
+    }
+
+    public static function generateAdminToken($email, $username, $userRole)
+    {
+        return md5(md5(self::SOLE . $email . $username . $userRole . date('d-m-Y')));
     }
 }

@@ -2,12 +2,15 @@
 
 namespace app\controllers\admin;
 
-use yii\web\Controller;
-
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionSetSetting()
+    {
+        
     }
 }

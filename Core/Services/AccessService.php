@@ -7,29 +7,31 @@ use app\Core\Helpers\AccessHelper;
 
 class AccessService
 {
-    public function accessToTest($token, $email, $testHash)
-    {
-        $myToken = AccessHelper::generateAccessToken($email);
+    public function accessToTest(
+        $token,
+        $email,
+        $username,
+        $testId,
+        $testType
+    ) {
+        $generatedToken = AccessHelper::generateTestToken(
+            $email,
+            $username,
+            $testId,
+            $testType
+        );
 
-        return $token === $myToken &&
-                $this->isValidTest($testHash, $email);
+        return $token === $generatedToken;
     }
-    
-    private function isValidTest($testHash, $email)
-    {
-        $findTest = $this->findTest($testHash);
 
-        return !empty($findTest)&&
-            $findTest->isStart() &&
-            $findTest->isFindUser($email);
-    }
-    
-    private function findTest($testHash)
+    public function accessToAdmin(
+        $token,
+        $email,
+        $username,
+        $userRole)
     {
-        if ($testHash == '098f6bcd4621d373cade4e832627b4f6') {
-            return Test::initialization();
-        }
+        $generatedToken = AccessHelper::generateAdminToken($email, $username, $userRole);
 
-        return false;
+        return $token === $generatedToken;
     }
 }
