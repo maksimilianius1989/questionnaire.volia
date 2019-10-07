@@ -1,4 +1,5 @@
-import rating from './rating'
+import ratingStore from './rating'
+import * as rating from '~/api/rating'
 
 class RootStore {
     constructor() {
@@ -7,7 +8,7 @@ class RootStore {
         }
 
         this.storage = localStorage
-        this.rating = new rating(this)
+        this.rating = new ratingStore(this)
     }
 }
 

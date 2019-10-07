@@ -2,19 +2,37 @@ import React from 'react'
 import styles from './index.module.css'
 import RatingAsk from '~c/asks/rating'
 import Footer from '~c/footer/rating'
+import withStore from "~/hocs/withStore"
 
 class Rating extends React.Component {
     render() {
+        let ratingModel = this.props.stores.rating
+
         return (
             <div className="container">
-                <div className={styles.header_info + " row"}>
-                    <div className="col-md-12">
-                        Уважаемый коллега, оцените пожалуйста, уровень своего участия в тренинге «Эффективный менеджмент. Управление персоналом».
-                        Ваше мнение о прошедшем тренинге очень важно для нас. Ваши оценки помогут сделать нашу совместную работу более эффективной, для этого ответьте на следующие вопросы:
-                    </div>
+                <div className={styles.title_info + " row"}>
+                    <div className="col-md-8">Название: {ratingModel.title}</div>
+                    <div className="col-md-4">Автор: {ratingModel.author}</div>
+                </div>
+                <div className={styles.description_info + " row"}>
+                    <div className="col-md-12">{ratingModel.description}</div>
                 </div>
 
-                <RatingAsk/>
+                {
+                    ratingModel.questionnaires.map((item, key) => {
+                        return <RatingAsk
+                            key={item.id}
+                            id={item.id}
+                            iconsSrc={ratingModel.iconsSrc}
+                            numberAsk={key + 1}
+                            asksCount={ratingModel.questionnaires.length}
+                            description={item.description}
+                            maximumScore={item.maximum_score}
+                            stores={this.props.stores}
+                            selectAnswerId={item.selectAnswerId}
+                        />
+                    })
+                }
 
                 <div className="row">
                     <div className="col-md-12">
@@ -30,4 +48,4 @@ class Rating extends React.Component {
     }
 }
 
-export default Rating
+export default withStore(Rating)

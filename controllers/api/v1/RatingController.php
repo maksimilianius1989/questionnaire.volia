@@ -15,6 +15,11 @@ class RatingController extends BaseController
             'author' => 'Иван Иванов',
             'title' => 'Название опросника',
             'description' => 'Здесь описание опросинка',
+            'icons_src' => [
+                'red' => 'http://questionnaire.volia.loc/images/red-smile.png',
+                'orange' => 'http://questionnaire.volia.loc/images/orange-smile.png',
+                'green' => 'http://questionnaire.volia.loc/images/green-smile.png',
+            ],
             'questions' => [
                 [
                     'description' => 'Вопрос опросник 1',

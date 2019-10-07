@@ -3,94 +3,43 @@ import styles from "./index.module.css"
 import EmotionBtn from "~c/buttons/emotion"
 
 export default class RatingAsk extends Component {
-    state = {
-        btnData: [
-            {
-                isSelect: false,
-                evaluationNumber: 1,
-                id: 1
-            },
-            {
-                isSelect: false,
-                evaluationNumber: 2,
-                id: 2
-            },
-            {
-                isSelect: false,
-                evaluationNumber: 3,
-                id: 3
-            },
-            {
-                isSelect: false,
-                evaluationNumber: 4,
-                id: 4
-            },
-            {
-                isSelect: false,
-                evaluationNumber: 5,
-                id: 5
-            },
-            {
-                isSelect: false,
-                evaluationNumber: 6,
-                id: 6
-            },
-            {
-                isSelect: false,
-                evaluationNumber: 7,
-                id: 7
-            },
-            {
-                isSelect: false,
-                evaluationNumber: 8,
-                id: 8
-            },
-            {
-                isSelect: false,
-                evaluationNumber: 9,
-                id: 9
-            },
-            {
-                isSelect: false,
-                evaluationNumber: 10,
-                id: 10
-            },
-        ]
-    }
-
-    smileIconSrc = {
-        red: "http://questionnaire.volia.loc/images/red-smile.png",
-        orange: "http://questionnaire.volia.loc/images/orange-smile.png",
-        green: "http://questionnaire.volia.loc/images/green-smile.png",
-    }
-
     getIconSrc(number) {
-        let length = this.state.btnData.length;
+        let length = this.props.maximumScore;
         let percent = number * 100 / length;
         if (percent <= 33) {
-            return this.smileIconSrc.red
+            return this.props.iconsSrc.red
         } else if (percent <= 66) {
-            return this.smileIconSrc.orange
+            return this.props.iconsSrc.orange
         } else {
-            return this.smileIconSrc.green
+            return this.props.iconsSrc.green
         }
     }
 
-    onChoice = (id) => {
-        let locBtnData = this.state.btnData;
-
-        for(let item of locBtnData) {
-            if (item.id !== id) {
-                item.isSelect = false;
-            } else {
-                item.isSelect = true
-            }
-        }
-
-        this.setState({btnData: locBtnData})
+    onChoice = (answerId) => {
+        let ratingModel = this.props.stores.rating
+        ratingModel.onChoice(this.props.id, answerId)
     }
 
     render() {
+        let emotionButtons = []
+        for (let i = 1; i <= this.props.maximumScore; i++) {
+            let isSelect = false
+            if (this.props.selectAnswerId == i) {
+                isSelect = true
+            }
+
+            emotionButtons.push(
+                <EmotionBtn
+                    key={i}
+                    id={i}
+                    onChoice={this.onChoice}
+                    imgSrc={this.getIconSrc(i)}
+                    evaluationNumber={i}
+                    isSelect={isSelect}
+                />
+            )
+        }
+
         return (
             <div className="ask_container">
 
@@ -99,11 +48,9 @@ export default class RatingAsk extends Component {
                         <div className="col-md-12">
                             <div className="row">
                                 <div className="col-md-2">
-                                    Вопрос <span className={styles.ask_count}>1</span> из <span className={styles.ask_count}>15</span>
+                                    Вопрос <span className={styles.ask_count}>{this.props.numberAsk}</span> из <span className={styles.ask_count}>{this.props.asksCount}</span>
                                 </div>
-                                <div className="col-md-10">
-                                    В водной части тренер(ы) четко изложили цели тренинга и его структуру.
-                                </div>
+                                <div className="col-md-10">{this.props.description}</div>
                             </div>
                         </div>
                     </div>
@@ -114,19 +61,7 @@ export default class RatingAsk extends Component {
                             </div>
                         </div>
                         <div className={styles.parent_emotion_container + " col-md-8"}>
-
-                            {this.state.btnData.map((item, key) => {
-
-                                return <EmotionBtn
-                                    key={item.id}
-                                    id={item.id}
-                                    onChoice={this.onChoice}
-                                    imgSrc={this.getIconSrc(key)}
-                                    evaluationNumber={item.evaluationNumber}
-                                    isSelect={item.isSelect}
-                                />
-                            })}
-
+                            {emotionButtons}
                         </div>
                         <div className="col-md-2">
                             <div className={styles.assessment_text + ' ' + styles.assessment_text_yes}>

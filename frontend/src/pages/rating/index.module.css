@@ -2,7 +2,11 @@ body {
     font-size: 16pt;
 }
 
-.header_info {
+.title_info {
+    margin: 10px 0;
+}
+
+.description_info {
     background: #666;
     color: #fff;
     text-align: center;
