@@ -2,7 +2,6 @@ import React from 'react'
 import withStore from "~/hocs/withStore"
 import styles from './index.module.css'
 import RatingAsk from '~c/asks/rating'
-import Finish from '~c/finish'
 import Header from '~c/header'
 import Footer from '~c/footer'
 
@@ -19,6 +18,7 @@ class Rating extends React.Component {
                     <div className="col-md-8">Название: {ratingModel.title}</div>
                     <div className="col-md-4">Автор: {ratingModel.author}</div>
                 </div>
+
                 <div className={styles.description_info + " row"}>
                     <div className="col-md-12">{ratingModel.description}</div>
                 </div>
@@ -40,7 +40,19 @@ class Rating extends React.Component {
                     })
                 }
 
-                <Finish isDisabled={true} />
+                <div className="row">
+                    <div
+                        className={styles.submit_container + " col-md-12"}
+                    >
+                        <button
+                            onClick={() => ratingModel.send()}
+                            className="btn btn-success"
+                            disabled={ratingModel.isDisabledSubmitBtn}
+                        >
+                            Завеншить оценку
+                        </button>
+                    </div>
+                </div>
 
                 <Footer />
             </div>

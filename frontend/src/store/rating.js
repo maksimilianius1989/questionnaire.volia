@@ -57,4 +57,41 @@ export default class {
         }
         this.isDisabledSubmitBtn = false
     }
+
+    @action send() {
+        let data = {
+            email: 'test@test.com',
+            username: 'Vasy Pupkin',
+            answer_list: [
+                {
+                    ask_id: 1,
+                    answer_id: 21,
+                },
+                {
+                    ask_id: 2,
+                    answer_id: 43,
+                },
+                {
+                    ask_id: 3,
+                    answer_id: 87,
+                },
+            ]
+        }
+
+        let postOptions = {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'SOME_TOKEN'
+            },
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify(data)
+        }
+
+        this.api.send(1, postOptions)
+    }
 }

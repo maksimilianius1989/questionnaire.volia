@@ -45,10 +45,8 @@ $config = [
             'rules' => [
                 'admin/<controller>/<action>' => 'admin/<controller>/<action>',
 
-                'GET api/v1/test/<id:\d+>' => 'api/v1/test/index',
-                'POST api/v1/test/<id:\d+>' => 'api/v1/test/create',
-                'GET api/v1/rating/<id:\d+>' => 'api/v1/rating/index',
-                'POST api/v1/rating/<id:\d+>' => 'api/v1/rating/create',
+                'GET api/v1/<type>/<id:\d+>' => 'api/v1/test/index',
+                'POST api/v1/<type>/<id:\d+>' => 'api/v1/test/create',
             ],
         ],
     ],
