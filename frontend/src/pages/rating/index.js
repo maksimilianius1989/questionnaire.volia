@@ -1,8 +1,10 @@
 import React from 'react'
+import withStore from "~/hocs/withStore"
 import styles from './index.module.css'
 import RatingAsk from '~c/asks/rating'
-import Footer from '~c/footer/rating'
-import withStore from "~/hocs/withStore"
+import Finish from '~c/finish'
+import Header from '~c/header'
+import Footer from '~c/footer'
 
 class Rating extends React.Component {
     render() {
@@ -10,6 +12,9 @@ class Rating extends React.Component {
 
         return (
             <div className="container">
+
+                <Header />
+
                 <div className={styles.title_info + " row"}>
                     <div className="col-md-8">Название: {ratingModel.title}</div>
                     <div className="col-md-4">Автор: {ratingModel.author}</div>
@@ -25,6 +30,7 @@ class Rating extends React.Component {
                             id={item.id}
                             iconsSrc={ratingModel.iconsSrc}
                             numberAsk={key + 1}
+                            imgSrc={item.img_src}
                             asksCount={ratingModel.questionnaires.length}
                             description={item.description}
                             maximumScore={item.maximum_score}
@@ -34,15 +40,9 @@ class Rating extends React.Component {
                     })
                 }
 
-                <div className="row">
-                    <div className="col-md-12">
+                <Finish isDisabled={true} />
 
-                        <Footer
-                            isDisabled={true}
-                        />
-
-                    </div>
-                </div>
+                <Footer />
             </div>
         )
     }

@@ -50,7 +50,21 @@ export default class RatingAsk extends Component {
                                 <div className="col-md-2">
                                     Вопрос <span className={styles.ask_count}>{this.props.numberAsk}</span> из <span className={styles.ask_count}>{this.props.asksCount}</span>
                                 </div>
-                                <div className="col-md-10">{this.props.description}</div>
+                                <div className="col-md-10">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            {this.props.description}
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <img className={styles.ask_img}
+                                                src={this.props.imgSrc}
+                                            />
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>

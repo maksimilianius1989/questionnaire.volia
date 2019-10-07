@@ -15,6 +15,7 @@ class RatingController extends BaseController
             'author' => 'Иван Иванов',
             'title' => 'Название опросника',
             'description' => 'Здесь описание опросинка',
+            'logo_src' => 'http://questionnaire.volia.loc/images/logo.png',
             'icons_src' => [
                 'red' => 'http://questionnaire.volia.loc/images/red-smile.png',
                 'orange' => 'http://questionnaire.volia.loc/images/orange-smile.png',
@@ -22,7 +23,8 @@ class RatingController extends BaseController
             ],
             'questions' => [
                 [
-                    'description' => 'Вопрос опросник 1',
+                    'description' => 'Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1Вопрос опросник 1',
+                    'img_src' => 'http://questionnaire.volia.loc/images/asks/ask1.jpg',
                     'maximum_score' => 10,
                     'id' => 1,
                 ],
@@ -43,6 +45,7 @@ class RatingController extends BaseController
                 ],
                 [
                     'description' => 'Вопрос опросник 5',
+                    'img_src' => 'http://questionnaire.volia.loc/images/asks/ask5.jpg',
                     'maximum_score' => 10,
                     'id' => 5,
                 ],
@@ -58,6 +61,7 @@ class RatingController extends BaseController
                 ],
                 [
                     'description' => 'Вопрос опросник 8',
+                    'img_src' => 'http://questionnaire.volia.loc/images/asks/ask8.jpg',
                     'maximum_score' => 10,
                     'id' => 8,
                 ],
