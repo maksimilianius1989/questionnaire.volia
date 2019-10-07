@@ -35,7 +35,7 @@ class Rating extends React.Component {
                             description={item.description}
                             maximumScore={item.maximum_score}
                             stores={this.props.stores}
-                            selectAnswerId={item.selectAnswerId}
+                            selectScore={item.selectScore}
                         />
                     })
                 }

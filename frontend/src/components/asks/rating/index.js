@@ -24,7 +24,7 @@ export default class RatingAsk extends Component {
         let emotionButtons = []
         for (let i = 1; i <= this.props.maximumScore; i++) {
             let isSelect = false
-            if (this.props.selectAnswerId == i) {
+            if (this.props.selectScore == i) {
                 isSelect = true
             }
 

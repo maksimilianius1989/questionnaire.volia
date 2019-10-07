@@ -52,7 +52,7 @@ class TestController extends Controller
     {
         $this->token = Yii::$app->request->get('token');
         $this->email = Yii::$app->request->get('email');
-        $this->userName = Yii::$app->request->get('user_name');
+        $this->userName = Yii::$app->request->get('username');
 
         $response = [];
         switch ($this->testType) {
@@ -74,13 +74,18 @@ class TestController extends Controller
         $headers = Yii::$app->request->getHeaders();
         $this->token = $headers['Authorization'];
 
-//        $this->email = Yii::$app->request->get('email');
-//        $this->userName = Yii::$app->request->get('user_name');
+        $post = Yii::$app->request->post();
+
+        $this->email = Yii::$app->request->post('email');
+        $this->userName = Yii::$app->request->post('username');
 
         return [
+            '$post' => $post,
             'token' => $this->token,
             'testId' => $this->testId,
             'testType' => $this->testType,
+            'email' => $this->email,
+            'userName' => $this->userName,
         ];
     }
 

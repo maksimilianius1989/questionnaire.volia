@@ -22,7 +22,7 @@ export default class {
     @action onChoice(askId, answerId) {
         for(let item of this.questionnaires) {
             if (item.id == askId) {
-                item.selectAnswerId = answerId
+                item.selectScore = answerId
             }
         }
         this.isCanSubmit()
@@ -49,8 +49,8 @@ export default class {
 
     @action isCanSubmit() {
         for(let item of this.questionnaires) {
-            if (!(item.hasOwnProperty('selectAnswerId') &&
-                Number.isInteger(item.selectAnswerId))) {
+            if (!(item.hasOwnProperty('selectScore') &&
+                Number.isInteger(item.selectScore))) {
                 this.isDisabledSubmitBtn = true
                 return
             }
@@ -59,23 +59,15 @@ export default class {
     }
 
     @action send() {
+        // let data = {
+        //     email: 'test@test.com',
+        //     username: 'Vasy Pupkin',
+        //     answer_list: this.generateAnswerList()
+        // }
+
         let data = {
-            email: 'test@test.com',
-            username: 'Vasy Pupkin',
-            answer_list: [
-                {
-                    ask_id: 1,
-                    answer_id: 21,
-                },
-                {
-                    ask_id: 2,
-                    answer_id: 43,
-                },
-                {
-                    ask_id: 3,
-                    answer_id: 87,
-                },
-            ]
+            data: 'aaa',
+            b: 'bb',
         }
 
         let postOptions = {
@@ -84,14 +76,27 @@ export default class {
             cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
-                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json; charset=UTF-8',
                 'Authorization': 'SOME_TOKEN'
             },
             redirect: 'follow',
             referrer: 'no-referrer',
-            body: JSON.stringify(data)
+            // body: JSON.stringify(data)
+            body: {"$post":{"name":"testName","name2":"testNmae2","email":"test@test.com","username":"myusername"},"token":"toekntnetd","testId":"1","testType":"test","email":"test@test.com","userName":"myusername"}
         }
 
         this.api.send(1, postOptions)
+    }
+
+    generateAnswerList() {
+        let answerList = []
+        for(let item of this.questionnaires) {
+            answerList.push({
+                ask_id: item.id,
+                select_score: item.selectScore
+            })
+        }
+        return answerList;
     }
 }
