@@ -5,6 +5,10 @@ import Start from '~p/start'
 import Finish from '~p/finish'
 import Rating from '~p/rating'
 import Test from '~p/test'
+import Error from '~p/error'
+import {getGETParams, isValidQueries} from '~/helpers'
+
+const getParams = getGETParams()
 
 export default class Home extends Component {
     state = {
@@ -38,12 +42,19 @@ export default class Home extends Component {
     }
 
     render() {
+        let page
+        if (isValidQueries(getParams)) {
+            page = this.state.page
+        } else {
+            page = <Error
+                        errorInfo="Не валидный url"
+                    />
+        }
+
         return (
             <div className="container">
                 <Header />
-
-                    {this.state.page}
-
+                    {page}
                 <Footer />
             </div>
         )

@@ -1,0 +1,14 @@
+.error_header {
+    color: red;
+    font-size: 20pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error_info {
+    margin-bottom: 10px;
+    background-color: #666;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
