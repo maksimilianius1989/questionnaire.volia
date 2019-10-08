@@ -1,5 +1,10 @@
 <?php
 
+//print_r($_POST);
+//print_r($_GET);
+//print_r(getallheaders());
+//die;
+
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');

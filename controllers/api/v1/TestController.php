@@ -18,6 +18,7 @@ class TestController extends Controller
     protected $userName;
     protected $testId;
     protected $testType; // test or rating
+    protected $answerList;
 
     public function __construct($id, $module, $config = [])
     {
@@ -77,7 +78,8 @@ class TestController extends Controller
         $post = Yii::$app->request->post();
 
         $this->email = Yii::$app->request->post('email');
-        $this->userName = Yii::$app->request->post('username');
+        $this->userName = Yii::$app->request->post('user_name');
+        $this->answerList = json_decode(Yii::$app->request->post('answers_list'));
 
         return [
             '$post' => $post,
@@ -86,6 +88,7 @@ class TestController extends Controller
             'testType' => $this->testType,
             'email' => $this->email,
             'userName' => $this->userName,
+            'answerList' => $this->answerList,
         ];
     }
 
