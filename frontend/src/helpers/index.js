@@ -27,7 +27,8 @@ function isValidQueries(queries) {
     if (queries !== null || queries !== undefined) {
         for (let getParams of requiresQueryParams) {
             if (queries !== undefined) {
-                if (!queries.hasOwnProperty(getParams)) {
+                if (!(queries.hasOwnProperty(getParams) &&
+                    queries[getParams] !== '')) {
                     return false
                 }
             }

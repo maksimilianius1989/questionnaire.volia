@@ -7,7 +7,7 @@ export default function makeRequest (url, options = {}, baseUrl = mainServerUrl)
                     return response
                             .text()
                             .then((text) => {
-                                throw new Error(text)
+                                return {error: "Критическая ошибка на сервере!"}
                             })
                 }
                 return response.json()

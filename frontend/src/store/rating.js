@@ -12,7 +12,7 @@ export default class {
     @observable isDisabledSubmitBtn = true
     @observable isSendingStatus = false
     @observable isSubmitResultSuccess = false
-    @observable questionnaires = []
+    @observable questions = []
 
     constructor(rootStore) {
         this.rootStore = rootStore
@@ -24,7 +24,7 @@ export default class {
     }
 
     @action onChoice(askId, answerId) {
-        for(let item of this.questionnaires) {
+        for(let item of this.questions) {
             if (item.id == askId) {
                 item.selectScore = answerId
             }
@@ -32,29 +32,70 @@ export default class {
         this.isCanSubmit()
     }
 
+    requiredResponseFields = [
+        'description',
+        'email',
+        'icons_src',
+        'id',
+        'logo_src',
+        'questions',
+        'title',
+        'type',
+        'user_name',
+    ]
+
+    isValidateResponseData(data) {
+        for (let item of this.requiredResponseFields) {
+            if (!(data.hasOwnProperty(item) &&
+                data[item] !== '' &&
+                data[item] !== null)) {
+                return false
+            }
+        }
+        return true
+    }
+
     @action load() {
         return new Promise((resolve, reject) => {
             this.api
                 .load(this.token, "test@test.test", "Maksim Bukach", 1)
                 .then((data) => {
-                    if (data) {
-                        this.questionnaires = data.questions
-                        this.id = data.id
-                        this.title = data.title
-                        this.description = data.description
-                        this.userName = data.user_name
-                        this.email = data.email
-                        this.type = data.type
-                        this.logoSrc = data.logo_src
-                        this.iconsSrc = data.icons_src
+                    if (data.hasOwnProperty('error') &&
+                        data.error !== '') {
+                        resolve({
+                            status: 'Error',
+                            text: data.error
+                        })
+                        return
                     }
-                    resolve(true)
+
+                    if (!this.isValidateResponseData(data)) {
+                        resolve({
+                            status: 'Error',
+                            text: "Сервер отвечает не коректно"
+                        })
+                        return
+                    }
+
+                    this.questions = data.questions
+                    this.id = data.id
+                    this.title = data.title
+                    this.description = data.description
+                    this.userName = data.user_name
+                    this.email = data.email
+                    this.type = data.type
+                    this.logoSrc = data.logo_src
+                    this.iconsSrc = data.icons_src
+
+                    resolve({
+                        status: 'Success'
+                    })
                 })
         })
     }
 
     @action isCanSubmit() {
-        for(let item of this.questionnaires) {
+        for(let item of this.questions) {
             if (!(item.hasOwnProperty('selectScore') &&
                 Number.isInteger(item.selectScore))) {
                 this.isDisabledSubmitBtn = true
@@ -97,7 +138,7 @@ export default class {
 
     generateAnswerList() {
         let answerList = []
-        for(let item of this.questionnaires) {
+        for(let item of this.questions) {
             answerList.push({
                 ask_id: item.id,
                 select_score: item.selectScore

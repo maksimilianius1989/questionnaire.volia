@@ -12,7 +12,6 @@ class Rating extends React.Component {
         this.ratingModel
             .send()
             .then((response, test) => {
-                console.log('--------------->response', response)
                 this.props.onChoicePage('finish')
             })
     }
@@ -53,14 +52,14 @@ class Rating extends React.Component {
                 </div>
 
                 {
-                    this.ratingModel.questionnaires.map((item, key) => {
+                    this.ratingModel.questions.map((item, key) => {
                         return <RatingAsk
                             key={item.id}
                             id={item.id}
                             iconsSrc={this.ratingModel.iconsSrc}
                             numberAsk={key + 1}
                             imgSrc={item.img_src}
-                            asksCount={this.ratingModel.questionnaires.length}
+                            asksCount={this.ratingModel.questions.length}
                             description={item.description}
                             maximumScore={item.maximum_score}
                             stores={this.props.stores}
