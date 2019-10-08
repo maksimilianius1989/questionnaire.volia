@@ -3,12 +3,15 @@ import {observable, computed, action, runInAction} from "mobx"
 export default class {
     @observable id
     @observable title
+    @observable type
     @observable description
-    @observable author
+    @observable userName
+    @observable email
     @observable logoSrc
     @observable iconsSrc
     @observable isDisabledSubmitBtn = true
     @observable isSendingStatus = false
+    @observable isSubmitResultSuccess = false
     @observable questionnaires = []
 
     constructor(rootStore) {
@@ -39,7 +42,9 @@ export default class {
                         this.id = data.id
                         this.title = data.title
                         this.description = data.description
-                        this.author = data.author
+                        this.userName = data.user_name
+                        this.email = data.email
+                        this.type = data.type
                         this.logoSrc = data.logo_src
                         this.iconsSrc = data.icons_src
                     }
@@ -60,27 +65,34 @@ export default class {
     }
 
     @action send() {
-        var formData  = new FormData();
-        let data = {
-            email: 'test@test.com',
-            user_name: 'Ivanov Taras',
-            answers_list: JSON.stringify(this.generateAnswerList())
-        }
+        return new Promise((resolve, reject) => {
+            var formData  = new FormData();
+            let data = {
+                email: 'test@test.com',
+                user_name: 'Ivanov Taras',
+                answers_list: JSON.stringify(this.generateAnswerList())
+            }
 
-        for(var name in data) {
-            formData.append(name, data[name]);
-        }
+            for(var name in data) {
+                formData.append(name, data[name]);
+            }
 
-        let postOptions = {
-            method: 'POST',
-            headers: {
-                'Authorization': 'SOME_TOKEN'
-            },
-            body: formData
-        }
+            let postOptions = {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'SOME_TOKEN'
+                },
+                body: formData
+            }
 
-        this.api.send(1, postOptions)
-        this.isSendingStatus = true
+            this.isSendingStatus = true
+
+            this.api
+                .send(1, postOptions)
+                .then((data) => {
+                    resolve(data)
+                })
+        })
     }
 
     generateAnswerList() {

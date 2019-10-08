@@ -4,11 +4,18 @@ import styles from './index.module.css'
 import RatingAsk from '~c/asks/rating'
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import Header from '~c/header'
-import Footer from '~c/footer'
 
 class Rating extends React.Component {
     ratingModel = this.props.stores.rating
+
+    send = () => {
+        this.ratingModel
+            .send()
+            .then((response, test) => {
+                console.log('--------------->response', response)
+                this.props.onChoicePage('finish')
+            })
+    }
 
     changeBtnType() {
         if (this.ratingModel.isSendingStatus) {
@@ -25,7 +32,7 @@ class Rating extends React.Component {
         }
 
         return <button
-                    onClick={() => this.ratingModel.send()}
+                    onClick={this.send}
                     className="btn btn-success"
                     disabled={this.ratingModel.isDisabledSubmitBtn}
                 >
@@ -35,13 +42,10 @@ class Rating extends React.Component {
 
     render() {
         return (
-            <div className="container">
-
-                <Header />
-
+            <div>
                 <div className={styles.title_info + " row"}>
                     <div className="col-md-8">Название: {this.ratingModel.title}</div>
-                    <div className="col-md-4">Автор: {this.ratingModel.author}</div>
+                    <div className="col-md-4">Тевтирующий: {this.ratingModel.userName}</div>
                 </div>
 
                 <div className={styles.description_info + " row"}>
@@ -72,8 +76,6 @@ class Rating extends React.Component {
                         {this.changeBtnType()}
                     </div>
                 </div>
-
-                <Footer />
             </div>
         )
     }
