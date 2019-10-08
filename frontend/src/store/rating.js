@@ -8,6 +8,7 @@ export default class {
     @observable logoSrc
     @observable iconsSrc
     @observable isDisabledSubmitBtn = true
+    @observable isSendingStatus = false
     @observable questionnaires = []
 
     constructor(rootStore) {
@@ -79,6 +80,7 @@ export default class {
         }
 
         this.api.send(1, postOptions)
+        this.isSendingStatus = true
     }
 
     generateAnswerList() {

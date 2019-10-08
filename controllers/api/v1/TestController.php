@@ -74,15 +74,11 @@ class TestController extends Controller
     {
         $headers = Yii::$app->request->getHeaders();
         $this->token = $headers['Authorization'];
-
-        $post = Yii::$app->request->post();
-
         $this->email = Yii::$app->request->post('email');
         $this->userName = Yii::$app->request->post('user_name');
         $this->answerList = json_decode(Yii::$app->request->post('answers_list'));
 
         return [
-            '$post' => $post,
             'token' => $this->token,
             'testId' => $this->testId,
             'testType' => $this->testType,
