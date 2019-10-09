@@ -26,6 +26,9 @@ class Home extends Component {
             case 'test':
                 model = this.props.stores.test
                 break;
+
+            default:
+                model = this.props.stores.test
         }
 
         return model
