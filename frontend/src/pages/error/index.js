@@ -10,7 +10,7 @@ export default class Error extends React.Component {
                         Упс... Что-то пошло не так =(
                     </div>
                     <div className={styles.error_info}>
-                        {this.props.errorInfo}
+                        {this.props.error}
                     </div>
                 </div>
             </div>

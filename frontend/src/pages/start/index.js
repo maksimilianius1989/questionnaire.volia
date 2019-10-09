@@ -3,7 +3,7 @@ import styles from './index.module.css'
 import withStore from "~/hocs/withStore"
 
 class Start extends React.Component {
-    model = this.props.stores.rating
+    model = this.props.model
 
     render () {
         return (
@@ -15,7 +15,7 @@ class Start extends React.Component {
                     </div>
                     <div className="row">
                     <div className="col-md-6">Тип:</div>
-                    <div className="col-md-6">{this.model.type}</div>
+                    <div className="col-md-6">{this.model.typeName}</div>
                 </div>
                     <div className="row">
                         <div className="col-md-6">Название:</div>
@@ -28,7 +28,7 @@ class Start extends React.Component {
                     <div className={styles.start_field}>
                         <button
                             className='btn btn-success'
-                            onClick={() => this.props.onChoicePage('rating')}
+                            onClick={() => this.props.onChoicePage(this.model.type)}
                         >
                             Начать
                         </button>

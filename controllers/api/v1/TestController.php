@@ -123,11 +123,13 @@ class TestController extends Controller
 
     private $test = [
         'id' => 1,
-        'type' => 'Тест',
+        'type' => 'test',
+        'type_name' => 'Тест',
         'email' => 'taras@ivanov.com',
         'user_name' => 'Тарас Иванов',
         'title' => 'Название теста',
         'description' => 'Здесь описание теста',
+        'logo_src' => 'http://questionnaire.volia.loc/images/logo.png',
         'questions' => [
             [
                 'description' => 'Вопрос тест 1',
@@ -364,7 +366,8 @@ class TestController extends Controller
 
     private $rating = [
         'id' => 1,
-        'type' => 'Опросник',
+        'type' => 'rating',
+        'type_name' => 'Опросник',
         'email' => 'ivan@tarasov.com',
         'user_name' => 'Иван Тарасов',
         'title' => 'Название опросника',

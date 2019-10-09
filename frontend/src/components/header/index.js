@@ -4,12 +4,12 @@ import styles from "./index.module.css"
 
 class Header extends Component {
     render() {
-        let ratingModel = this.props.stores.rating
+        let model = this.props.model
 
         return (
             <div className="row">
                 <div className={styles.header_container + " col-md-12"}>
-                    <img src={ratingModel.logoSrc} />
+                    <img src={model.logoSrc} />
                 </div>
             </div>
         )

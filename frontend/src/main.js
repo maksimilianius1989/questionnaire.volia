@@ -4,37 +4,51 @@ import Home from '~p/Home'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Provider} from "mobx-react"
 import stores from '~s'
-import {getGETParams, isValidQueries} from '~/helpers'
+import {getGETParams, isValidQueries, saveGlobalConfig} from '~/helpers'
 
 const getParams = getGETParams()
 
 if (!isValidQueries(getParams)) {
-    render({errorInfo: "Не валидный url"})
-} else if(getParams.type === 'rating') {
-    stores.rating
-        .load()
-        .then((response) => {
-            let params = {}
-            if (response.status === 'Error') {
-                params = {errorInfo: response.text}
-            }
+    render({error: "Ссылка на тест повреждена!"})
+} else {
+    saveGlobalConfig(getParams)
+
+    let params = {}
+    switch (getParams.type) {
+        case 'rating':
+            stores.rating
+                .load()
+                .then((response) => {
+                    if (response.error !== '') {
+                        params = {error: response.error}
+                    }
+
+                    render(params)
+                })
+            break
+
+        case 'test':
+            stores.test
+                .load()
+                .then((response) => {
+                    if (response.error !== '') {
+                        params = {error: response.error}
+                    }
+
+                    render(params)
+                })
+            break
+
+        default:
+            params = {error: "Не верно указан тип теста"}
             render(params)
-        })
-} else if(getParams.type === 'test') {
-    // stores.test
-    //     .load()
-    //     .then((response) => {
-    //         render()
-    //     })
-    render({errorInfo: "Test еще не готов"})
+    }
 }
 
 function render(params = {}) {
     ReactDom.render(
         <Provider stores={stores}>
-            <Home
-                errorInfo={params.errorInfo}
-            />
+            <Home error={params.error} />
         </Provider>,
         document.querySelector("#app")
     )

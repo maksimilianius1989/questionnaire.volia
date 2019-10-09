@@ -1,9 +1,7 @@
 import {observable, computed, action, runInAction} from "mobx"
 import BaseStore from "./baseStore"
 
-export default class Rating extends BaseStore {
-    @observable iconsSrc
-
+export default class Test extends BaseStore{
     @action onChoice(askId, answerId) {
         for(let item of this.questions) {
             if (item.id == askId) {
@@ -14,16 +12,15 @@ export default class Rating extends BaseStore {
     }
 
     requiredResponseFields = [
-        'description',
-        'email',
-        'icons_src',
         'id',
-        'logo_src',
-        'questions',
-        'title',
         'type',
         'type_name',
+        'email',
         'user_name',
+        'title',
+        'description',
+        'logo_src',
+        'questions',
     ]
 
     isValidateResponseData(data) {
@@ -51,24 +48,12 @@ export default class Rating extends BaseStore {
     }
 
     @action isCanSubmit() {
-        for(let item of this.questions) {
-            if (!(item.hasOwnProperty('selectScore') &&
-                Number.isInteger(item.selectScore))) {
-                this.isDisabledSubmitBtn = true
-                return
-            }
-        }
-        this.isDisabledSubmitBtn = false
+        return false
     }
 
     generateAnswerList() {
         let answerList = []
-        for(let item of this.questions) {
-            answerList.push({
-                ask_id: item.id,
-                select_score: item.selectScore
-            })
-        }
+
         return answerList;
     }
 }

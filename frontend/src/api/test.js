@@ -1,11 +1,19 @@
 import makeRequest from './helpers/makeRequest'
 
-function load(token, email, username, testId) {
-    return makeRequest(`test/testId?token=${token}&email=${email}&username=${username}`)
+function load(token, type, testId, email, userName) {
+    return makeRequest(`${type}/${testId}?token=${token}&email=${email}&username=${userName}`)
 }
 
-function send(token, email, username, testId) {
-    return makeRequest(`test/testId?token=${token}&email=${email}&username=${username}`)
+function send(token, type, testId, body) {
+    let postOptions = {
+        method: 'POST',
+        headers: {
+            'Authorization': token
+        },
+        body: body
+    }
+
+    return makeRequest(`${type}/${testId}`, postOptions)
 }
 
 export {load, send}

@@ -6,21 +6,40 @@ import Finish from '~p/finish'
 import Rating from '~p/rating'
 import Test from '~p/test'
 import Error from '~p/error'
+import withStore from "~/hocs/withStore"
 
-export default class Home extends Component {
+class Home extends Component {
     state = {
         page: <Start
+                    model = {this.initModel()}
                     onChoicePage={this.onChoicePage.bind(this)}
                 />
+    }
+
+    initModel() {
+        let model
+        switch (localStorage.getItem('type')) {
+            case 'rating':
+                model = this.props.stores.rating
+                break;
+
+            case 'test':
+                model = this.props.stores.test
+                break;
+        }
+
+        return model
     }
 
     onChoicePage(pageName = 'start') {
         let page;
         switch (pageName) {
             case 'rating':
-                page = <Rating
-                            onChoicePage={this.onChoicePage.bind(this)}
-                        />
+                page = <Rating onChoicePage={this.onChoicePage.bind(this)} />
+                break
+
+            case 'test':
+                page = <Test onChoicePage={this.onChoicePage.bind(this)} />
                 break
 
             case 'finish':
@@ -28,9 +47,7 @@ export default class Home extends Component {
                 break
 
             default:
-                page = <Start
-                            onChoicePage={this.onChoicePage.bind(this)}
-                        />
+                page = <Start onChoicePage={this.onChoicePage.bind(this)} />
         }
 
          this.setState({
@@ -40,15 +57,19 @@ export default class Home extends Component {
 
     render() {
         let page
-        if(this.props.errorInfo !== undefined && this.props.errorInfo !== '') {
-            page = <Error errorInfo={this.props.errorInfo} />
+        if(this.props.error !== undefined &&
+            this.props.error !== '' &&
+            this.props.error !== null) {
+            page = <Error error={this.props.error} />
         } else {
             page = this.state.page
         }
 
         return (
             <div className="container">
-                <Header />
+                <Header
+                    model={this.initModel()}
+                />
 
                 {page}
 
@@ -57,3 +78,5 @@ export default class Home extends Component {
         )
     }
 }
+
+export default withStore(Home)

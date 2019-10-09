@@ -38,4 +38,13 @@ function isValidQueries(queries) {
     return false
 }
 
-export {getGETParams, isValidQueries}
+function saveGlobalConfig(params) {
+    localStorage.setItem('serverHost', params.server_host)
+    localStorage.setItem('token', params.token)
+    localStorage.setItem('type', params.type)
+    localStorage.setItem('testId', params.test_id)
+    localStorage.setItem('email', params.email)
+    localStorage.setItem('userName', params.user_name)
+}
+
+export {getGETParams, isValidQueries, saveGlobalConfig}
