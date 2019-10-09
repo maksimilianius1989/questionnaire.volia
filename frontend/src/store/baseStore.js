@@ -32,6 +32,7 @@ export default class BaseStore {
             this.api
                 .load(
                     localStorage.getItem('token'),
+                    localStorage.getItem('serverHost'),
                     localStorage.getItem('type'),
                     localStorage.getItem('testId'),
                     localStorage.getItem('email'),

@@ -9,16 +9,18 @@ class AccessService
 {
     public function accessToTest(
         $token,
+        $serverHost,
         $email,
-        $username,
-        $testId,
-        $testType
+        $userName,
+        $testType,
+        $testId
     ) {
         $generatedToken = AccessHelper::generateTestToken(
+            $serverHost,
             $email,
-            $username,
-            $testId,
-            $testType
+            $userName,
+            $testType,
+            $testId
         );
 
         return $token === $generatedToken;

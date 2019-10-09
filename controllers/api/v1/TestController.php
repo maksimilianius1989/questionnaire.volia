@@ -19,6 +19,7 @@ class TestController extends Controller
     protected $testId;
     protected $testType; // test or rating
     protected $answerList;
+    protected $serverHost;
 
     public function __construct($id, $module, $config = [])
     {
@@ -48,26 +49,37 @@ class TestController extends Controller
         return parent::beforeAction($action);
     }
 
-    ///?token=[md5(sole + email + date('d-m-Y'))]&email=test@test.com&username=Maks%20Ivanov&test_id=1
     public function actionIndex()
     {
         $this->token = Yii::$app->request->get('token');
         $this->email = Yii::$app->request->get('email');
-        $this->userName = Yii::$app->request->get('username');
+        $this->userName = Yii::$app->request->get('user_name');
+        $this->serverHost = Yii::$app->request->get('server_host');
 
-        $response = [];
-        switch ($this->testType) {
-            case self::TYPE_RATING:
-                $response = $this->rating;
-                break;
+        if ($this->accessService->accessToTest(
+            $this->token,
+            $this->serverHost,
+            $this->email,
+            $this->userName,
+            $this->testType,
+            $this->testId
+        )) {
+            $response = [];
+            switch ($this->testType) {
+                case self::TYPE_RATING:
+                    $response = $this->rating;
+                    break;
 
-            case self::TYPE_TEST:
-                $response = $this->test;
-                break;
+                case self::TYPE_TEST:
+                    $response = $this->test;
+                    break;
+            }
+
+            // должна использоватея еще систима рандома для пользователей
+            return $response;
         }
 
-        // должна использоватея еще систима рандома для пользователей
-        return $response;
+        return ['error' => 'Не валидный токен'];
     }
 
     public function actionCreate()
